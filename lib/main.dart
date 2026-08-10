@@ -452,7 +452,7 @@ class _SmsHomePageState extends State<SmsHomePage> {
       headerAndDataList.add(dataRow);
     }
 
-    String csvData = const ListToCsvConverter().convert(headerAndDataList);
+    String csvData = csv.encode(headerAndDataList);
     final bytes = utf8.encode(csvData);
     Uint8List data = Uint8List.fromList(bytes);
     XFile xFile = XFile.fromData(data, mimeType: 'text/csv');
