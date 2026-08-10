@@ -29,6 +29,12 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
+        ndk {
+            // 插件已预置默认 ABI 列表，需先清空再设置（buildType 级 abiFilters 在 AGP 9 下不生效）
+            abiFilters.clear()
+            abiFilters += "arm64-v8a"
+        }
     }
 
     signingConfigs {
@@ -45,11 +51,6 @@ android {
             signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
             isShrinkResources = true
-
-            ndk {
-                //noinspection ChromeOsAbiSupport
-                abiFilters += "arm64-v8a"
-            }
         }
         debug {
             signingConfig = signingConfigs.getByName("release")
